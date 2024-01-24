@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Search App</title>
+
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      header {
+        width: 100%;
+        background-color: dodgerblue;
+        margin-top: 0px;
+        padding: 10px 0px;
+      }
+
+      h1 {
+        display: block;
+        color: white;
+        margin: 0px;
+        text-align: center;
+        font-family: cursive;
+      }
+
+      #searchForm {
+        margin: 50px;
+      }
+      #query {
+        width: 400px;
+        height: 30px;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: large;
+        font-family: sans-serif;
+        border: 1px solid black;
+      }
+      #search {
+        height: 50px;
+        border-radius: 10px;
+        padding: 10px;
+        font-family: cursive;
+        background-color: lightgreen;
+        border: 2px solid grey;
+        color: grey;
+        font-size: large;
+      }
+      #search:hover {
+        background-color: lightslategrey;
+        color: white;
+      }
+
+      #searchResults {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: whitesmoke;
+        font-family: sans-serif;
+      }
+      #benchmark {
+        padding: 10px;
+        border-radius: 5px;
+        background-color: lightgreen;
+      }
+      footer {
+        width: 100%;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: sans-serif;
+        background-color: lightslategray;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Historical Information Retrieval Search Engine</h1>
+    </header>
+
+    <form id="searchForm">
+      <input
+        id="query"
+        placeholder="Enter your query..."
+        type="text"
+        id="query"
+        name="query"
+      />
+      <button id="search" type="submit">Search</button>
+    </form>
+    <div id="searchResults">
+      <h2>Relevant Documents</h2>
+    </div>
+
+    <footer>
+      <h2>Information retrieval mini project</h2>
+      <h4>Topic : Historical information retrieval based on wikipedia.</h4>
+      <p>Name of the Student : DEVADA KUMARA SWAMY</p>
+      <p>Roll Number : S20210010060</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#searchForm").submit(function (e) {
+          e.preventDefault();
+          var query = $("#query").val();
+          $.ajax({
+            type: "POST",
+            url: "/search",
+            data: { query: query },
+            success: function (response) {
+              $("#searchResults").html(response);
+            },
+          });
+        });
+      });
+
+      function myFunction() {
+        alert("Button clicked!");
+        // You can add your custom logic here
+      }
+    </script>
+  </body>
+</html>
